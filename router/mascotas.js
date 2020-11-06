@@ -44,4 +44,44 @@ router.post('/', async (req,res) => {
     }
 })
 
+router.get('/:id', async (req,res)=>{
+    const id = req.params.id 
+
+    try {
+        const mascotaDB = await Mascota.findOne({_id:id}) // id viene de params, _id viene de mongodb
+        res.render('detalle', {
+            mascota: mascotaDB,
+            error: false
+        })
+
+    } catch (error) {
+        console.log(error);
+        res.render('detalle', {
+            mensaje: 'No se encuentra la mascota',
+            error: true
+        })
+    }
+})
+
+router.delete('/:id', async (req,res) => {
+    const id = req.params.id 
+    try {
+        const mascotaDB = await Mascota.findByIdAndDelete({_id:id})
+        if (mascotaDB){
+            res.json({
+                estado: true,
+                mensaje: 'Mascota eliminada'
+            })
+        }
+        else{
+            res.json({
+                estado: true,
+                mensaje: 'Mascota eliminada'
+            })
+        }
+    } catch (error) {
+        
+    }
+})
+
 module.exports = router;
