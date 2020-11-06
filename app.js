@@ -1,5 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser')
 const app = express();
+
+// Configuración body parser
+// parser application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false}));
+// parse application/json
+app.use(bodyParser.json());
+
+
 
 //Variables de entorno
 require('dotenv').config();
@@ -30,7 +39,7 @@ app.use(express.static(__dirname + "/public"))
 // Traemos las rutas
 app.use('/',require('./router/rutas'))
 /* app.use('/api',require('./router/rutas')) */
-app.use('/',require('./router/mascotas'))
+app.use('/mascotas', require('./router/mascotas'))
 
 app.use((req, res, next) => {
   res.status(404).render("404", { titulo: "Página 404" });

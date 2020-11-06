@@ -4,7 +4,7 @@ const router = express.Router();
 const Mascota = require('../models/mascota');
 
 
-router.get('/mascotas', async (req,res)=>{
+router.get('/', async (req,res)=>{ // localhost:3000/mascotas
     try {
         const arrayMascotasDB = await Mascota.find();
         /* console.log(arrayMascotasDB); */
@@ -22,6 +22,26 @@ router.get('/mascotas', async (req,res)=>{
             {id:'1c', nombre:'Tiranosaurio cex', descripcion:'Malo y flaco'}
         ]
     }) */
+})
+
+router.get('/crear', (req, res) => {  // localhost:3000/mascotas/crear
+    res.render('crear')
+})  
+
+router.post('/', async (req,res) => {
+    const body = req.body;
+    /* console.log(body); */
+    try {
+        // primer método
+        /* const mascotaDB = new Mascota(body);
+        await mascotaDB.save();  */
+        /* console.log(mascotaDB); */
+        //segundo método
+        await Mascota.create(body); 
+        res.redirect('/mascotas');
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 module.exports = router;
