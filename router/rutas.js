@@ -10,4 +10,5 @@ router.get("/nosotros", (req, res) => {
   res.render("nosotros", { titulo: "Nosotros EJS" });
 });
 
+
 module.exports = router;
