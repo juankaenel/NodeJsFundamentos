@@ -80,7 +80,27 @@ router.delete('/:id', async (req,res) => {
             })
         }
     } catch (error) {
-        
+        console.log(error);
+    }
+})
+
+router.put('/:id', async(req,res) => {
+    const id = req.params.id
+    const body = req.body // Datos que vienen del body, nombre y descripción, para usarlos hay que tener instalado body parser
+
+    try {
+        const mascotaDB = await Mascota.findByIdAndUpdate(id,body,{useFindAndModify:false})
+        console.log(mascotaDB);
+        res.json({
+            estado:true,
+            mensaje: 'Mascota editada'
+        })
+    } catch (error) {
+        console.log(error);
+        res.json({
+            estado:true,
+            mensaje: 'Falló la edición de la mascota'
+        })
     }
 })
 

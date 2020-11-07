@@ -1,7 +1,7 @@
 <%- include("templates/cabecera", {"tituloWeb":'Mascotas'}) %>
 
-<div class="container">
-
+<div class="container py-2">
+ 
     <table class="table table-dark">
         <thead>
             <tr>
@@ -18,13 +18,17 @@
                         <th scope="row"><%= mascota.id %> </th>
                         <td><%= mascota.nombre %> </td>
                         <td><%= mascota.descripcion %> </td>
-                        <td> <a class="btn btn-warning btn-sm" href="mascotas/<%= mascota.id %>"> Editar </a> </td>
+                        <td> <a class="btn btn-warning btn-sm" href="mascotas/<%= mascota.id %>"> Editar </a></td>
                     </tr>
                 <% }) %>
             <% } %>
         </tbody>
     </table>
+    <a class="btn btn-success btn-block" href="mascotas/crear"> Crear </a>
+
+
 
 </div>
 
 <%- include('templates/footer') %>
+
